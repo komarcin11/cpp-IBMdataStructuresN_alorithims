@@ -361,3 +361,45 @@ int main (void){
         p++;
     }
 }
+
+//____________MEMORY_________
+//dynamic_allocating_memory.cpp
+#include <iostream>
+using namespace std;
+
+int main (void){
+    int size = 8;
+    int* p = new int[size]; //new is a key word to allocate memory
+    for (int i = 0; i<size;i++){
+        p[i]=i;//becouse an array is already an adress to a first element you can allocate a new element of size which iin this example is the same as int p[size]
+    }
+    for (int j = 0; j<size; j++){
+        cout << p[j] << endl;
+    }
+    delete[] p; // when you ask for memory you need to free it
+}
+
+//searchig_for_the_biggest_numb.cpp
+#include <iostream>
+using namespace std;
+
+int main (void){
+    int n;
+    cout << "how much numbers?: ";
+    cin >> n; // size of array
+
+    int* nums = NULL;
+    nums = new int [n];
+
+    int max = 0;
+    for(int i=1; i<=n; i++){
+        cout << "insert the "<<i<<" number: ";
+        cin  >> nums[i];
+        if(nums[i]>max){
+            max = nums[i];
+            // cout << "current max is : "<< max<<endl;
+        }
+    }
+    cout << "the bigest number is: " <<max;
+    delete[] nums;
+}

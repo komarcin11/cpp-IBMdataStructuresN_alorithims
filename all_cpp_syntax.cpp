@@ -331,6 +331,27 @@ int main (void){
     cout << num <<endl;  // and output the changed value
 }
 
+//swap.cpp
+#include <iostream>
+using namespace std;
+void swap(int* x, int* y){
+    int tmp = *x;
+    *x = *y;
+    *y = tmp;
+}
+int main() {
+    int a =1;
+    int b =2;
+    cout << "a is: "<< a<<endl;
+    cout << "b is: "<< b<<endl;
+    
+    swap(&a,&b);
+    cout<< "After change"<< endl;
+    cout << "a is: "<< a<<endl;
+    cout << "b is: "<< b<<endl;
+    return 0;
+}
+
 
 //__________________POINTERS & ARRYAS__________________
 //pointers_and_arrys.cpp
@@ -403,3 +424,4 @@ int main (void){
     cout << "the bigest number is: " <<max;
     delete[] nums;
 }
+

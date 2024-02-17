@@ -285,7 +285,7 @@ int main (void){
         sum += prices[i];// or just access them
     }
     cout << sum<<endl;
-
+    //fore-each loop
     for(auto x: prices){//you can iterath thought the elements as so
         cout << x<<endl;//the x varable could be declared as double or an auto
     }
@@ -331,27 +331,6 @@ int main (void){
     cout << num <<endl;  // and output the changed value
 }
 
-//swap.cpp
-#include <iostream>
-using namespace std;
-void swap(int* x, int* y){
-    int tmp = *x;
-    *x = *y;
-    *y = tmp;
-}
-int main() {
-    int a =1;
-    int b =2;
-    cout << "a is: "<< a<<endl;
-    cout << "b is: "<< b<<endl;
-    
-    swap(&a,&b);
-    cout<< "After change"<< endl;
-    cout << "a is: "<< a<<endl;
-    cout << "b is: "<< b<<endl;
-    return 0;
-}
-
 
 //__________________POINTERS & ARRYAS__________________
 //pointers_and_arrys.cpp
@@ -381,6 +360,27 @@ int main (void){
         cout << *p<<endl;
         p++;
     }
+
+    //swap.cpp
+#include <iostream>
+using namespace std;
+void swap(int* x, int* y){
+    int tmp = *x;
+    *x = *y;
+    *y = tmp;
+}
+int main() {
+    int a =1;
+    int b =2;
+    cout << "a is: "<< a<<endl;
+    cout << "b is: "<< b<<endl;
+    
+    swap(&a,&b);
+    cout<< "After change"<< endl;
+    cout << "a is: "<< a<<endl;
+    cout << "b is: "<< b<<endl;
+    return 0;
+}
 }
 
 //____________MEMORY_________
@@ -424,4 +424,119 @@ int main (void){
     cout << "the bigest number is: " <<max;
     delete[] nums;
 }
+
+//______________FUNCTIONS_______________
+//first_functions.cpp
+#include <iostream>
+using namespace std;
+
+void hello(string name);//inserting a function prototype//like in C// not nessesery but you can signal for te function existance before defining it
+
+int main (void){
+    string x;
+    cout << "what is your name: ";
+    cin >> x;
+    hello(x);//calling for a function, you can call how may times you want
+}
+
+void hello(string name){//defining a function// void means it does not output anything// inside the () are the arguments
+    cout << "hello "<<name<<endl;
+}
+
+//multiple_arguments.cpp
+#include <iostream>
+using namespace std;
+
+void sum(int x,int y){
+    cout<< x+y <<endl;
+}
+int main (void){
+    sum(1,2);
+}
+
+//function_returning_values.cpp
+#include <iostream>
+using namespace std;
+
+void add(int x,int y){// in this example the function will not return a values to the main fuction // void
+    cout<< x+y <<endl;
+}
+
+int sum(int x,int y){// in this example the function will return a int values to the main fuction // int
+    return x+y ;// keyword return will return the valueafter
+}
+
+int main (void){
+    add(1,2);
+    int a = sum(1,2);
+    cout<< a<<endl;
+}
+
+//overloadinf_a_function.cpp
+//oveerloading is a proces where you redefine a fun with different type of arguments
+#include <iostream>
+using namespace std;
+
+int sum(int x,int y){
+    return x+y ;
+}
+
+int sum(double x,double y){//here we redefine the function with double arrguments
+    return x+y ;
+}
+
+// double sum(double x,double y){// we canot redefine a fun. with different return type
+//     return x+y ;
+// }
+
+int main (void){
+    int a = sum(1,2);
+    cout<< a<<endl;
+    int b = sum(1.2,2.03);
+    cout<< b<<endl;
+}
+
+//defult_arguments.cpp
+//oveerloading is a proces where you redefine a fun with different type of arguments
+#include <iostream>
+using namespace std;
+
+int sum(int x,int y=2){//where you a def a function you can def a default value for the function arguments
+    return x+y ;
+}
+
+int main (void){
+    int a = sum(1);
+    cout<< a<<endl;
+}
+
+
+//_________OBJECT ORIENTED PROGRAMING___________
+//OOP is a proces where you use a object to program
+//an object has its attributes (characteristics), identyty and functionality(behavior)
+//exapme a car (identyty) is read (attribute) and can drive (functionality)
+
+
+//________CLASSES___________
+//CLASS is a object blueprint, it defines the object name functionalytie and attributes
+//METHODS are the class function
+// instane is an object of particular class
+
+//declaring_a_class.cpp
+#include <iostream>
+using namespace std;
+
+class BankAccount{//class name //object name usualy are starting with a capital letter
+    public: //public is a access specifier
+    // the values declared as "public" are accesable from the outside of the class// and in contrast u an use "private"
+        void sayHi(){ // defining a method
+            cout<<"Hi"<<endl;
+        }
+};
+
+int main (void){
+    BankAccount test;//creating a instance
+    test.sayHi();// using a class method
+}
+
 

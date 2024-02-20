@@ -540,3 +540,36 @@ int main (void){
 }
 
 
+//___________ABSTRACTION___________
+//abstraction is a proces of leting only the nessesary info/data out of the class
+//abstraction is a black bo philosophy, you what a function does not how it work beacuse it is not importatne
+
+//__________ENCAPSULATION_________
+// in OOP encapsulation is a process of restricting acces to praticular data/metods in an object
+//key principle is to reveal only what is nessesery (data hiding)
+
+//ACCESS SPECIFIERS are used to set access levels to class members - public, protect, private // if not sepcified default is privates
+//declaring_a_class.cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+class myClass{
+    public: // public parts
+        void setName (string x){ // this method is defined to give access to the name attribute
+            name = x;
+        }
+        string getName(){
+            return name; // this method is writen to return the private attributes
+        }
+    private: // private parts
+        string name; // that is not acceessable from the outside of the class
+};
+
+int main (void){
+    myClass myObj;
+    myObj.setName("Tom");
+    cout<<myObj.getName() <<endl;
+    return 0;
+}
+

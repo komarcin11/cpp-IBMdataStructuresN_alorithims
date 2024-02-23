@@ -573,3 +573,86 @@ int main (void){
     return 0;
 }
 
+
+//__________CONSTRUCTOR_______________
+//first_constructor.cpp
+//constructor is a special function member of the class that is executed whenever an class instance is created
+#include <iostream>
+using namespace std;
+
+class myClass{
+    public: 
+        myClass(string n){//the constructor name has to be the same as the class
+            cout<<"hey"<<endl;
+            setName(n);//constructor can be usefool the set the initial data
+        }
+        void setName (string x){ 
+            name = x;
+        }
+        string getName(){
+            return name;
+        }
+    private: 
+        string name; 
+};
+
+int main (void){
+    myClass myObj("tom"); //but while creating an object u need to specifiy he attribute
+    cout<<myObj.getName() <<endl;
+    return 0;
+}
+
+
+//______________CLASSES IN SEPARATE FILE____________
+//Source & Header - is nessesary to implement a class frome a separate file
+// header .h file// source .cpp the source code (with the class definition)
+//the header holds the function declarations (protypes) and variable declaration
+//source will hold its implementation and its methods 
+
+//below is an example of moving a class to a separate file from a previous example 
+//MyClass.h
+#ifndef MYCLASS_H
+#define MYCLASS_H
+
+#include <string>
+using namespace std;
+
+class myClass {
+public:
+    myClass(string n);
+    void setName(string x);
+    string getName();
+private:
+    string name;
+};
+#endif
+
+//MyClass.cpp
+#include "MyClass.h"
+#include <iostream>
+using namespace std;
+myClass::myClass(string n) {
+    cout << "hey" << endl;
+    setName(n);
+}
+
+void myClass::setName(string x) {
+    name = x;
+}
+
+string myClass::getName() {
+    return name;
+}
+
+//my_first_class_implementation.cpp
+#include "MyClass.h"
+#include <iostream>
+using namespace std;
+
+int main() {
+    myClass myObj("tom");
+    cout << myObj.getName() << endl;
+    return 0;
+}
+
+//to cerrecty compile the comiler function should be as follows: clang++ .\my_first_class_implementation.cpp .\MyClass.cpp -o .\my_first_class_implementation.exe

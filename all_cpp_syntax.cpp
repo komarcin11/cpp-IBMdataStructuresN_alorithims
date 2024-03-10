@@ -603,6 +603,39 @@ int main (void){
 }
 
 
+//______________DESTRUCTOR_______________
+//first_destructor.cpp
+//as construtor is executed while the obj is created the destructor is a function that is executed when the obj is deleted
+// since destructors can't take parameters they cant alsow be ovverloaded, one class have one destructor
+#include <iostream>
+using namespace std;
+
+class myClass{
+    public: 
+        myClass(string n){//the constructor 
+            cout<<"hey"<<endl;
+            setName(n);
+        }
+        ~myClass(){//the destructor name has to be the same as the class with ~ prior to the name
+            cout<< "ending program"<<endl;
+        }
+        void setName (string x){ 
+            name = x;
+        }
+        string getName(){
+            return name;
+        }
+    private: 
+        string name; 
+};
+
+int main (void){
+    myClass myObj("tom"); //but while creating an object u need to specifiy he attribute
+    cout<<myObj.getName() <<endl;
+    return 0;
+}
+
+
 //______________CLASSES IN SEPARATE FILE____________
 //Source & Header - is nessesary to implement a class frome a separate file
 // header .h file// source .cpp the source code (with the class definition)
@@ -611,7 +644,7 @@ int main (void){
 
 //below is an example of moving a class to a separate file from a previous example 
 //MyClass.h
-#ifndef MYCLASS_H
+#ifndef MYCLASS_H // stand - for if not defined // that tells the program to define the MyClass header if it has not beed definess
 #define MYCLASS_H
 
 #include <string>
@@ -620,7 +653,9 @@ using namespace std;
 class myClass {
 public:
     myClass(string n);
+    ~myClass();
     void setName(string x);
+    void myPrint();   
     string getName();
 private:
     string name;
@@ -631,9 +666,13 @@ private:
 #include "MyClass.h"
 #include <iostream>
 using namespace std;
-myClass::myClass(string n) {
+myClass::myClass(string n) { // def constructor
     cout << "hey" << endl;
     setName(n);
+}
+
+myClass::~myClass(){ // def destructor
+    cout << "end program"<<endl;
 }
 
 void myClass::setName(string x) {
@@ -642,6 +681,10 @@ void myClass::setName(string x) {
 
 string myClass::getName() {
     return name;
+}
+
+void myClass::myPrint(){
+    cout<<"hello"<<endl;
 }
 
 //my_first_class_implementation.cpp
@@ -654,5 +697,110 @@ int main() {
     cout << myObj.getName() << endl;
     return 0;
 }
+//to correcty compile the comiler function should be as follows: clang++ .\my_first_class_implementation.cpp .\MyClass.cpp -o .\my_first_class_implementation or -.exe
 
-//to cerrecty compile the comiler function should be as follows: clang++ .\my_first_class_implementation.cpp .\MyClass.cpp -o .\my_first_class_implementation.exe
+// you can preper all the above file in one file as so
+//first_class_definition_prepared_for diferent_files.cpp
+#include <iostream>
+using namespace std;
+
+class myClass {
+public:
+    myClass(string n);
+    ~myClass();
+    void setName(string x);
+    void myPrint();   
+    string getName();
+private:
+    string name;
+};
+
+myClass::myClass(string n) { // def constructor
+    cout << "hey" << endl;
+    setName(n);
+}
+
+myClass::~myClass(){ // def destructor
+    cout << "end program"<<endl;
+}
+
+void myClass::setName(string x) {
+    name = x;
+}
+
+string myClass::getName() {
+    return name;
+}
+
+void myClass::myPrint(){
+    cout<<"hello"<<endl;
+}
+
+int main() {
+    myClass myObj("tom");
+    cout << myObj.getName() << endl;
+    myObj.myPrint();
+    return 0;
+}
+
+//________________POINTERS IN CLASSES__________________
+//pointer as used to get access to obj members 
+//first_pointer_with_classes.cpp
+#include <iostream>
+using namespace std;
+
+class myClass {
+public:
+    myClass();
+    void myPrint();
+};
+
+myClass::myClass() {
+}
+void myClass::myPrint(){
+    cout<<"hello"<<endl;
+}
+
+int main() {
+    myClass myObj;
+    myObj.myPrint();
+    myClass* ptr = &myObj;//here we assign a pointer to obj adress
+    ptr->myPrint(); //this is how to access the obj. members
+    (*ptr).myPrint();// the -> is the same as (*__). // as can be seen here
+    return 0;
+}
+
+//______________CONSTANTS_____________
+//first_constats.cpp
+//const varabiles/obj are are inmutable and canot be changed after its initialization
+// only non-constant obj can call non-constant functions
+// a const obj cant call regualr functions
+// so if you want to use constant obj you need const function in you class definiotions
+#include <iostream>
+using namespace std;
+
+class myClass {
+public:
+    myClass(string x);
+    void myPrint();
+    void justPrint() const; // const function declaration
+};
+
+myClass::myClass(string x) {
+    cout<<"hello "<<x<<endl;
+}
+void myClass::myPrint(){
+    cout<<"hello"<<endl;
+}
+
+void myClass::justPrint() const{  // const function definition
+    cout<<"constant hello"<<endl;
+}
+
+int main() {
+    const int i = 1;//constant variables with value delcare within initialization
+    const myClass obj("tom"); //in case if constant classes u need to initialize by use of constructors
+    obj.justPrint();
+    // obj.myPrint(); // attempt to call a regural function on a const obj will resault in an error
+    return 0;
+}

@@ -551,7 +551,7 @@ int main (void){
 //ACCESS SPECIFIERS are used to set access levels to class members - public, protect, private // if not sepcified default is privates
 //declaring_a_class.cpp
 #include <iostream>
-#include <string>
+#include <string>   
 using namespace std;
 
 class myClass{
@@ -791,7 +791,7 @@ myClass::myClass(string x) {
 }
 void myClass::myPrint(){
     cout<<"hello"<<endl;
-}
+}s
 
 void myClass::justPrint() const{  // const function definition
     cout<<"constant hello"<<endl;
@@ -804,3 +804,32 @@ int main() {
     // obj.myPrint(); // attempt to call a regural function on a const obj will resault in an error
     return 0;
 }
+
+
+//______________MEMBER INITIALIZERS_______________
+//member_initializer_list.cpp // or constructor initializer
+//member initialization list can be used on ordinary variables but must be used on constant ones
+#include <iostream>
+using namespace std;
+
+class myClass {
+public:
+    myClass(int a, int b); // if you have a class with const variables
+private:
+    int regVar;
+    const int constVar;
+};
+
+myClass::myClass(int a, int b)
+:regVar(a),constVar(b)//in the class constructor you use a initialization list to assign values to those const variables
+{
+    cout<<regVar<<endl;
+    cout<<constVar<<endl;
+}
+
+int main() {
+    myClass obj(1,2);
+    return 0;
+}
+
+//_____________COMPOSITION_________________

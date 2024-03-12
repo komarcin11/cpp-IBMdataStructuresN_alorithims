@@ -833,3 +833,44 @@ int main() {
 }
 
 //_____________COMPOSITION_________________
+// first_composition.cpp
+// complex obj are build with use of smaller elements 
+// the point of composition is to solve simple tasks 
+#include <iostream>
+using namespace std;
+
+class Birthday { // this is a small Birthday class
+    public:
+        Birthday (int d, int m, int y)
+        :day(d),month(m),year(y)   
+{}
+    void printDate(){
+        cout<<day<<"\\"<<month<<"\\"<<year<<endl;
+    }  
+    private:
+        int day;
+        int month;
+        int year;
+};
+
+class Person{ //this is a bigger Person class that uses the Birthday class as an element
+    public:
+        Person(string n, Birthday b)
+        :name(n),bd(b)
+    {}
+    void printinfo(){
+        cout<<name<<endl;
+        bd.printDate();//whithin the bigger class you can call a method from the smaller class to access the data from the smaller class
+    }
+    private:
+        string name;
+        Birthday bd;
+};
+
+int main() {
+    Birthday bd(20,10,1988);
+    Person p("tom",bd);
+    p.printinfo();
+    return 0;
+}
+

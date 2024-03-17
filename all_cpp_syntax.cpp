@@ -1,7 +1,7 @@
 // ALL THE CPP CODE I KNOW //
 //COMPILING WITH CLANG
 // comand to compile is clang++ (insted clang in c)
-
+    
 
 //__________PRINT/COUNT comand________________
 
@@ -874,3 +874,114 @@ int main() {
     return 0;
 }
 
+
+//_________________FRIENDLY FUNCTIONS__________________
+// first_composition.cpp
+// friendly function can access the private variables of a class 
+#include <iostream>
+using namespace std;
+
+class MyClass{
+    public:
+        MyClass(){
+            regVar = 0;
+        }
+    private:
+        int regVar;
+
+    friend void someFunc(MyClass &obj);//you just need to declare a firendly function ass you can see here 
+};
+
+void someFunc(MyClass &obj){// and can define it outside of the class
+    obj.regVar = 42; // here we are accesing the class private elements 
+    cout << obj.regVar;
+}
+
+int main() {
+    MyClass obj;
+    someFunc(obj);
+}
+
+
+//_______THIS___________
+// first_this_keyword.cpp
+// this keyword is important in operator overloading
+#include <iostream>
+using namespace std;
+
+class MyClass{
+    public:
+        MyClass(int a): var(a){
+        }
+        void printInfo(){
+            cout << var << endl;
+            cout << this -> var<<endl;
+            cout << (*this).var << endl;
+        }//frined functions do not have this pointer because there are not class member
+    private:
+        int var;
+
+ };
+
+int main() {
+    MyClass obj(42);
+    obj.printInfo();
+}
+
+
+//chatgpt_example
+#include <iostream>
+using namespace std;
+
+class MyClass {
+public:
+    int memberVar;
+    
+    MyClass(int memberVar) : memberVar(memberVar) {}
+    
+    void setVar(int localVar) {
+        // Without 'this', localVar would refer to the parameter
+        this->memberVar = localVar; // 'this' disambiguates, refers to the member variable
+    }
+    
+    void printVar() {
+        cout << "Member variable memberVar: " << memberVar << endl;
+    }
+};
+
+int main() {
+    MyClass obj(10);
+    obj.printVar(); // Prints "Member variable memberVar: 10"
+    obj.setVar(20);
+    obj.printVar(); // Prints "Member variable memberVar: 20"
+    return 0;
+}
+
+
+//___________OPERATORS OVERLOADING_____________
+// operators_overloading.cpp
+#include <iostream>
+using namespace std;
+//for operator overloading u can usee a lot of operator:
+//+ - * / % ^ & | ~ ! , = < > <= >= ++ -- << >> == != && and more
+class MyClass{
+    public:
+    int var;
+    MyClass () {}
+    MyClass (int a):var(a){}
+
+    // operator overloading is similar to other function // it has a return tyoe and a parameter list
+    // in this example the parameter is an MyClass obj and the return is also a MyClass obj
+    MyClass operator+(MyClass &obj){// here we define should happen if the + operator is used a in the main function // the & is needed to access the passed class 
+        MyClass res;
+        res.var = this ->var + obj.var; // here the "this" key word dereferences the value in the var that is in the class definition // in current class obj not the parameter obj (&obj)
+        return res;
+    
+    }
+ };
+
+int main() {
+    MyClass obj1(12), obj2(55);
+    MyClass res = obj1 + obj2; // <- here
+    cout << res.var<<endl;
+}

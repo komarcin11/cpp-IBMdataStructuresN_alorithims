@@ -985,3 +985,41 @@ int main() {
     MyClass res = obj1 + obj2; // <- here
     cout << res.var<<endl;
 }
+
+
+//______________INHERITANCE___________________
+// first_inheritance.cpp
+// inheritance in very important concept of OOP, it allows a class to be based on another class.
+// a devrived (Daughter) class inherits properties from the base (parent) class
+#include <iostream>
+using namespace std;
+
+class Mother{
+    public:
+        Mother() {};
+        void sayHi() {
+            cout<<"Hi"<< endl; // that is a public function that is accesible for the derived class
+        }
+    protected: // here we have new access specifier, the proteced elements accesigle to the its class and the derived classes (but no the obj of the derived classes)
+        void sayBye(){
+            cout << "Bye" << endl;
+        }
+    private:
+        int a;
+};
+
+class Daughter: public Mother{ // here we define the inheritance of the class // with public access specifier
+    public:
+        Daughter() {};
+        void sayingBye(){
+            sayBye(); // the protected element of the base class can be acces by the derived class
+        }
+};
+
+int main() {
+    Daughter d;
+    d.sayHi();// as you can see here i can access the parent class function from the derive class object
+    d.sayingBye(); 
+    // d.sayBye();// this is not posible because the sayBye() function is proteced element of the base class, 
+}
+

@@ -1023,3 +1023,154 @@ int main() {
     // d.sayBye();// this is not posible because the sayBye() function is proteced element of the base class, 
 }
 
+
+//derived_calss_constructor_and_destructors.cpp
+#include <iostream>
+using namespace std;
+
+class Mother{
+    public:
+        Mother() {
+            cout<<"Mother cerator"<<endl;
+        };
+        ~Mother() {
+            cout<<"Mother destructor"<<endl;
+        };
+};
+
+class Daughter: public Mother{
+    public:
+        Daughter() {
+            cout<<"Daughter cerator"<<endl;
+        };
+        ~Daughter() {
+            cout<<"Daughter destructor"<<endl;
+        };
+};
+//so in this order the constructors are executed
+//mother const, dougther const, doutgher dest, mothre destr.
+int main() {
+    Daughter d;
+}
+
+
+//_______________POLIMORPHISM___________________
+//first_polymorphism.cpp
+//polymorphisim is one single function can have many different implementations
+#include <iostream>
+using namespace std;
+
+class Enemy {
+    protected:
+        int attackPower;
+    public:
+        void setAttackPower(int a){
+            attackPower = a;
+        }
+};
+//each Enemy derived classes are have "attack" function that works differently in this functions
+class Ninja: public Enemy{
+    public:
+        void attack(){
+            cout << "Ninja! - " <<attackPower<<endl;
+        }
+};
+
+class Monster: public Enemy {
+    public:
+        void attack(){
+            cout << "Monster! - " << attackPower<<endl;
+        }
+};
+
+int main(){//Ninja and Monster obj are Enemy derived obj
+    Ninja n;
+    Monster m;
+    Enemy *e1 = &n; // we can create a pointer to the base class throught the derived class
+    Enemy *e2 = &m;
+
+    e1->setAttackPower(20);// here with use of the created above pointers we can access the parent class function
+    e2->setAttackPower(80);
+
+    n.attack();
+    m.attack();
+}
+
+
+//_________________VIRTUAL FUNCTIONS____________
+//first_virtual_functions.cpp
+// if we want to have in every implementation a function we need to use a virtual function
+// after definition we can use Enemy pointer to call the derived classes functions
+// every derived class will overwrite the base class function but 
+// if a function has a virtual function it is polymorphic
+#include <iostream>
+using namespace std;
+
+class Enemy {
+    public:
+        virtual void attack(){ // that is the declaration of a virtual function
+            cout << "Enemy! - Attack " <<endl;
+            }//after declaring a function to be virtual it works as a template, and lets know that a derived function might have its own attack function
+};
+
+class Ninja: public Enemy{
+    public:
+        // void attack(){
+        //     cout << "Ninja! - Attack " <<endl;
+        // }
+};
+
+class Monster: public Enemy {
+    public:
+        void attack(){
+            cout << "Monster! - Attack " <<endl;
+        }
+};
+
+int main(){
+    Ninja n;// if Ninja would not have defined attack function it would execute the Enemy attack fun.
+    Monster m;
+    Enemy* e1 = &n;
+    Enemy* e2 = &m;
+
+    e1->attack();
+    e2->attack();
+}
+
+//_________________ABSTRACK CLASSES____________
+//abstrack_classes.cpp
+// as stated above polimophism is where there are defined classes with the same name but different implementatnion
+#include <iostream>
+using namespace std;
+
+class Enemy {
+    public:
+        virtual void attack() = 0; // virtual functions witśhout definition is called pure virtual function
+};//if there is a pure virtual function that specifyes that the derived function will define that function
+
+class Ninja: public Enemy{// the derived functions need to thave the attack function defined if not there will be a compile error
+    public:
+        void attack(){
+            cout << "Ninja! - Attack " <<endl;
+        }
+};
+
+class Monster: public Enemy {
+    public:
+        void attack(){
+            cout << "Monster! - Attack " <<endl;
+        }
+};
+
+int main(){
+    Ninja n;
+    Monster m;
+    // Enemy e; //you cannot create a obj from a with a pure virtual fun. these classes are called abstrack classes- they can only be used as a base
+                // an abstrack function is usefull to create pointers and take advantefe of its polimorhic abilities
+
+    Enemy* e1 = &n;
+    Enemy* e2 = &m;
+
+    e1->attack();
+    e2->attack();
+}

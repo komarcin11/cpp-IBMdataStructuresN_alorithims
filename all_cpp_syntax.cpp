@@ -1174,3 +1174,28 @@ int main(){
     e1->attack();
     e2->attack();
 }
+
+
+//_______________________FUNCTIONAL TEMPLATES_____________________
+// first_functional_template.cpp
+//functional classees are used to write easeyer, safer and more maintainable code.
+#include <iostream>
+using namespace std;
+
+int addition (int a, int b){// standart function has defined the input paramethers type and the return type
+    return a+b; // if you would want to use that same fun. but for doubles you would need to write a different function
+}
+
+//template function allows to define a function behaivior and the input type would be used to define the output type
+template <class T>//to def. a template fun you need to use this syntax
+T sum(T a, T b){
+    return a+b;
+}//now u can use the sum() fun. any numeric variable types// compiler calls the fun for the corresponding type
+
+int main(){
+    int x= 2, y=15;
+    double z = 3.2, w = 34.5;
+    cout << addition(x,y)<<endl;
+    cout << sum(x,y)<<endl;
+    cout << sum(z,w)<<endl;
+}

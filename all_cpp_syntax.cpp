@@ -1199,3 +1199,20 @@ int main(){
     cout << sum(x,y)<<endl;
     cout << sum(z,w)<<endl;
 }
+
+
+//multiple_generic_data_types.cpp
+#include <iostream>
+using namespace std;
+
+template <class T, class U> // u can use a mutiple data types
+T smaller (T a, U b){ // the output is converted to the first data type (in out example it will be an int)
+    return (a<b ? a : b);//mini conditional a<b - confdition ? if right (a) : if wrong (b)
+}// u can use anting insted of T or U just don use C++
+//if u usde a non specifyed data type (like T or U) u need to use it in function def. else the compiler will output and error
+
+int main(){
+    int x= 4;
+    double w = 2.5;
+    cout << smaller(x,w)<<endl;
+}

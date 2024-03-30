@@ -510,6 +510,26 @@ int main (void){
     cout<< a<<endl;
 }
 
+//____________TERNARY OPERATOR_______________
+//ternary_operator.cpp
+#include <iostream>
+using namespace std;
+//ternary operator is testing a condition an executuin a value mini block of code   a<b - confdition ? if right (a) : if wrong (b)
+int bigger(int a, int b){
+    return(a > b ? a : b);// here is a example in a function of ternary operator
+}//  a<b - confdition ? if true (a) : if false (b)
+
+int main(){
+    cout << "which is bigger" << endl;
+    int x, y;
+    cout << "x is : ";
+    cin >> x;
+    cout << "y is : ";
+    cin >> y;
+    cout << bigger(x,y)<< endl;
+    return 0;
+}
+
 
 //_________OBJECT ORIENTED PROGRAMING___________
 //OOP is a proces where you use a object to program
@@ -1215,4 +1235,65 @@ int main(){
     int x= 4;
     double w = 2.5;
     cout << smaller(x,w)<<endl;
+}
+
+
+//_____________CLASS TEMPLATES____________
+//first_class_template.cpp
+// just like with function template u can create class template
+#include <iostream>
+using namespace std;
+
+//as in normal class if you want to define function outside of the class you can do int as following
+template <class T>
+class Pair {
+    private:
+        T first, second;
+    public:
+        Pair(T a, T b):first(a), second(b){
+        }
+        T bigger();
+};
+
+//here are the function defined
+template <class T>
+T Pair <T>::bigger(){ //generic type are in <>
+    return(first > second ? first : second);
+};
+
+int main(){
+    Pair <int> obj(11, 22);
+    cout << obj.bigger()<<endl;
+
+    return 0;
+}
+
+
+//___________TEMPLATE SPECIALIZATION________________
+//template_specialization.cpp
+//template specialization allows to deffine diferent implementation to diffrent data types
+#include <iostream>
+using namespace std;
+
+template <class T>
+class MyClass {
+    public:
+        MyClass (T x){
+            cout << x<< " - not char"<<endl;
+        }
+};
+
+template<> // use this syntax to initiaite specialize implementation for different data types
+class MyClass<char> {//here we define a different implemetation for char variable type
+    public:
+        MyClass (char x){
+            cout << x << " - is char" << endl;
+        }
+};
+//you could inherit a class and do a specialization template from the base class
+
+int main(){
+    MyClass<int> ob1(42);
+    MyClass <double> ob2(4.45);
+    MyClass <char> ob3('s');
 }
